@@ -1,0 +1,20 @@
+﻿===CMD:cat /etc/caddy/Caddyfile===
+
+ERR:cat: /etc/caddy/Caddyfile: No such file or directory
+
+===CMD:sudo caddy version 2>&1; sudo caddy list-modules 2>&1 | head -5===
+sudo: 'caddy': command not found
+sudo: 'caddy': command not found
+
+===CMD:ls /opt/cortexhq-site /opt/sglaudit /opt/chouflimostakbel 2>&1 | head===
+/opt/chouflimostakbel:
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+README.md
+app
+components
+lib
+next-env.d.ts
+next.config.ts
+

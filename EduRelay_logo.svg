@@ -1,0 +1,117 @@
+<!--
+  EduRelay Logo — SVG
+  =====================
+  CSS variables to customize (written without the leading dashes so this
+  comment stays valid XML — a comment may not contain a double hyphen):
+    brand          : main teal (icon bg, "Edu" text)
+    brand-dark     : darker teal (book spine detail)
+    brand-light    : light teal (backgrounds)
+    accent         : amber (relay arrow + underline)
+
+  To resize: change width/height on the <svg> element.
+  The viewBox is fixed at 0 0 680 340 — all internal
+  coordinates scale automatically.
+
+  Light / dark mode:
+    Add data-theme="dark" to <svg> for forced dark mode,
+    or rely on the @media (prefers-color-scheme) block.
+-->
+<svg width="680" height="340" viewBox="0 0 680 340"
+     xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>EduRelay</title>
+  <desc>EduRelay logo — school supplies, passed forward</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+
+    <style>
+      /* ── THEME TOKENS — edit these to retheme the whole logo ── */
+      :root {
+        --brand:       #1D9E75;   /* primary teal  */
+        --brand-dark:  #085041;   /* deep teal     */
+        --brand-light: #E1F5EE;   /* pale teal bg  */
+        --accent:      #EF9F27;   /* amber relay   */
+        --text-main:   #2C2C2A;   /* wordmark dark */
+        --text-sub:    #888780;   /* tagline muted */
+      }
+      /* Dark-mode auto */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --brand:       #5DCAA5;
+          --brand-dark:  #9FE1CB;
+          --brand-light: #04342C;
+          --accent:      #FAC775;
+          --text-main:   #D3D1C7;
+          --text-sub:    #888780;
+        }
+      }
+      /* Force dark */
+      svg[data-theme="dark"] {
+        --brand:       #5DCAA5;
+        --brand-dark:  #9FE1CB;
+        --brand-light: #04342C;
+        --accent:      #FAC775;
+        --text-main:   #D3D1C7;
+        --text-sub:    #888780;
+      }
+    </style>
+  </defs>
+
+  <!-- ══ ICON MARK ══ -->
+  <rect x="100" y="80" width="160" height="160" rx="32" fill="var(--brand)"/>
+
+  <!-- Left book (sender) -->
+  <rect x="120" y="112" width="48" height="60" rx="5" fill="white" opacity="0.9"/>
+  <rect x="123" y="115" width="21" height="54" rx="3" fill="var(--brand-dark)" opacity="0.6"/>
+  <rect x="146" y="115" width="19" height="54" rx="3" fill="white" opacity="0.5"/>
+  <line x1="128" y1="126" x2="142" y2="126" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="128" y1="132" x2="142" y2="132" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="128" y1="138" x2="142" y2="138" stroke="white" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Relay arrow -->
+  <path d="M176 155 Q200 135 224 155" fill="none" stroke="var(--accent)"
+        stroke-width="3.5" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.95"/>
+
+  <!-- Right book (receiver) -->
+  <rect x="192" y="112" width="48" height="60" rx="5" fill="white" opacity="0.9"/>
+  <rect x="195" y="115" width="21" height="54" rx="3" fill="var(--brand-dark)" opacity="0.6"/>
+  <rect x="218" y="115" width="19" height="54" rx="3" fill="white" opacity="0.5"/>
+  <line x1="200" y1="126" x2="214" y2="126" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="200" y1="132" x2="214" y2="132" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="200" y1="138" x2="214" y2="138" stroke="white" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Left person -->
+  <circle cx="144" cy="200" r="8" fill="white" opacity="0.85"/>
+  <path d="M144 208 L144 222 M136 214 L152 214 M144 222 L139 234 M144 222 L149 234"
+        stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+
+  <!-- Right person -->
+  <circle cx="216" cy="200" r="8" fill="white" opacity="0.85"/>
+  <path d="M216 208 L216 222 M208 214 L224 214 M216 222 L211 234 M216 222 L221 234"
+        stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+
+  <!-- ══ WORDMARK ══ -->
+  <text x="285" y="167"
+        font-family="'Helvetica Neue', 'Arial', sans-serif"
+        font-size="56" font-weight="700"
+        fill="var(--brand)" letter-spacing="-1">Edu</text>
+
+  <text x="399" y="167"
+        font-family="'Helvetica Neue', 'Arial', sans-serif"
+        font-size="56" font-weight="300"
+        fill="var(--text-main)" letter-spacing="-1">Relay</text>
+
+  <!-- Accent underline under "Edu" -->
+  <rect x="285" y="174" width="110" height="3" rx="1.5" fill="var(--accent)" opacity="0.9"/>
+
+  <!-- Tagline -->
+  <text x="285" y="195"
+        font-family="'Helvetica Neue', 'Arial', sans-serif"
+        font-size="13" font-weight="400"
+        fill="var(--text-sub)" letter-spacing="2">SCHOOL SUPPLIES · PASSED FORWARD</text>
+
+</svg>

@@ -1,0 +1,133 @@
+===CMD:cd /home/ubuntu/edurelay && pm2 delete edurelay 2>/dev/null; echo deleted===
+[PM2] Applying action deleteProcessId on app [edurelay](ids: [ 0 ])
+[PM2] [edurelay](0) ✓
+┌────┬───────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name      │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+└────┴───────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 14.3% | ram usage: 30.6% | lo: ⇓ 0.001mb/s ⇑ 0.001mb/s | ens3: ⇓ 0.702mb/s ⇑ 0.005mb/s | veth1f3d1fd: ⇓ 0.001mb/s ⇑ 0mb/s | veth7f6b6ce: ⇓ 0.003mb/s ⇑ 0mb/s | vethb2a6b91: ⇓ 0mb/s ⇑ 0.003mb/s | disk: ⇓ 0.75mb/s ⇑ 1.64mb/s
+deleted
+
+===CMD:cd /home/ubuntu/edurelay && PORT=3000 pm2 start server.js --name edurelay --cwd /home/ubuntu/edurelay===
+[PM2] Starting /home/ubuntu/edurelay/server.js in fork_mode (1 instance)
+[PM2] Done.
+┌────┬─────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name        │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 0  │ edurelay    │ default     │ 0.1.0   │ fork    │ 410474   │ 0s     │ 0    │ online    │ 0%       │ 16.4mb   │ ubuntu   │ disabled │
+└────┴─────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 14.3% | ram usage: 30.6% | lo: ⇓ 0.001mb/s ⇑ 0.001mb/s | ens3: ⇓ 0.702mb/s ⇑ 0.005mb/s | veth1f3d1fd: ⇓ 0.001mb/s ⇑ 0mb/s | veth7f6b6ce: ⇓ 0.003mb/s ⇑ 0mb/s | vethb2a6b91: ⇓ 0mb/s ⇑ 0.003mb/s | disk: ⇓ 0.75mb/s ⇑ 1.64mb/s
+
+===CMD:pm2 save===
+[PM2] Saving current process list...
+[PM2] Successfully saved in /home/ubuntu/.pm2/dump.pm2
+
+===CMD:sleep 4; curl -s -o /dev/null -w 'HTTP %{http_code}' http://127.0.0.1:3000/fr; echo===
+HTTP 000
+
+===CMD:pm2 list===
+┌────┬─────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name        │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 0  │ edurelay    │ default     │ 0.1.0   │ fork    │ 0        │ 0      │ 15   │ errored   │ 0%       │ 0b       │ ubuntu   │ disabled │
+└────┴─────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 14.3% | ram usage: 30.6% | lo: ⇓ 0.001mb/s ⇑ 0.001mb/s | ens3: ⇓ 0.702mb/s ⇑ 0.005mb/s | veth1f3d1fd: ⇓ 0.001mb/s ⇑ 0mb/s | veth7f6b6ce: ⇓ 0.003mb/s ⇑ 0mb/s | vethb2a6b91: ⇓ 0mb/s ⇑ 0.003mb/s | disk: ⇓ 0.75mb/s ⇑ 1.64mb/s
+
+===CMD:pm2 logs edurelay --lines 40 --nostream 2>&1===
+[TAILING] Tailing last 40 lines for [edurelay] process (change the value with --lines option)
+/home/ubuntu/.pm2/logs/edurelay-out.log last 40 lines:
+/home/ubuntu/.pm2/logs/edurelay-error.log last 40 lines:
+0|edurelay |     at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+0|edurelay |     at Module.require (node:internal/modules/cjs/loader:1487:12)
+0|edurelay |     at require (node:internal/modules/helpers:135:16)
+0|edurelay |     at Object.<anonymous> (/home/ubuntu/edurelay/server.js:16:1)
+0|edurelay |     at Module._compile (node:internal/modules/cjs/loader:1730:14) {
+0|edurelay |   code: 'MODULE_NOT_FOUND',
+0|edurelay |   requireStack: [ '/home/ubuntu/edurelay/server.js' ]
+0|edurelay | }
+0|edurelay | Error: Cannot find module 'next'
+0|edurelay | Require stack:
+0|edurelay | - /home/ubuntu/edurelay/server.js
+0|edurelay |     at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+0|edurelay |     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+0|edurelay |     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+0|edurelay |     at Function._load (node:internal/modules/cjs/loader:1211:37)
+0|edurelay |     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+0|edurelay |     at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+0|edurelay |     at Module.require (node:internal/modules/cjs/loader:1487:12)
+0|edurelay |     at require (node:internal/modules/helpers:135:16)
+0|edurelay |     at Object.<anonymous> (/home/ubuntu/edurelay/server.js:16:1)
+0|edurelay |     at Module._compile (node:internal/modules/cjs/loader:1730:14) {
+0|edurelay |   code: 'MODULE_NOT_FOUND',
+0|edurelay |   requireStack: [ '/home/ubuntu/edurelay/server.js' ]
+0|edurelay | }
+0|edurelay | Error: Cannot find module 'next'
+0|edurelay | Require stack:
+0|edurelay | - /home/ubuntu/edurelay/server.js
+0|edurelay |     at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+0|edurelay |     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+0|edurelay |     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+0|edurelay |     at Function._load (node:internal/modules/cjs/loader:1211:37)
+0|edurelay |     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+0|edurelay |     at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+0|edurelay |     at Module.require (node:internal/modules/cjs/loader:1487:12)
+0|edurelay |     at require (node:internal/modules/helpers:135:16)
+0|edurelay |     at Object.<anonymous> (/home/ubuntu/edurelay/server.js:16:1)
+0|edurelay |     at Module._compile (node:internal/modules/cjs/loader:1730:14) {
+0|edurelay |   code: 'MODULE_NOT_FOUND',
+0|edurelay |   requireStack: [ '/home/ubuntu/edurelay/server.js' ]
+0|edurelay | }
+
+
+===CMD:ls /home/ubuntu/edurelay/node_modules | grep -i next; echo ---; find /home/ubuntu/edurelay -name 'next' -type d -maxdepth 4 2>/dev/null | head===
+next
+---
+
+===CMD:cat /home/ubuntu/edurelay/server.js | head -20===
+const path = require('path')
+
+const dir = path.join(__dirname)
+
+process.env.NODE_ENV = 'production'
+process.chdir(__dirname)
+
+const currentPort = parseInt(process.env.PORT, 10) || 3000
+const hostname = process.env.HOSTNAME || '0.0.0.0'
+
+let keepAliveTimeout = parseInt(process.env.KEEP_ALIVE_TIMEOUT, 10)
+const nextConfig = {"env":{},"eslint":{"ignoreDuringBuilds":false},"typescript":{"ignoreBuildErrors":false,"tsconfigPath":"tsconfig.json"},"typedRoutes":false,"distDir":"./.next","cleanDistDir":true,"assetPrefix":"","cacheMaxMemorySize":52428800,"configOrigin":"next.config.mjs","useFileSystemPublicRoutes":true,"generateEtags":true,"pageExtensions":["tsx","ts","jsx","js"],"poweredByHeader":false,"compress":true,"images":{"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","loaderFile":"","domains":[],"disableStaticImages":false,"minimumCacheTTL":60,"formats":["image/avif","image/webp"],"maximumResponseBody":50000000,"dangerouslyAllowSVG":false,"contentSecurityPolicy":"script-src 'none'; frame-src 'none'; sandbox;","contentDispositionType":"attachment","remotePatterns":[{"protocol":"http","hostname":"127.0.0.1","port":"54321","pathname":"/storage/v1/**"},{"protocol":"https","hostname":"*.supabase.co","pathname":"/storage/v1/**"}],"unoptimized":false},"devIndicators":{"position":"bottom-left"},"onDemandEntries":{"maxInactiveAge":60000,"pagesBufferLength":5},"amp":{"canonicalBase":""},"basePath":"","sassOptions":{},"trailingSlash":false,"i18n":null,"productionBrowserSourceMaps":false,"excludeDefaultMomentLocales":true,"serverRuntimeConfig":{},"publicRuntimeConfig":{},"reactProductionProfiling":false,"reactStrictMode":true,"reactMaxHeadersLength":6000,"httpAgentOptions":{"keepAlive":true},"logging":{},"compiler":{},"expireTime":31536000,"staticPageGenerationTimeout":60,"output":"standalone","modularizeImports":{"@mui/icons-material":{"transform":"@mui/icons-material/{{member}}"},"lodash":{"transform":"lodash/{{member}}"}},"outputFileTracingRoot":"C:\\Users\\lassa\\Desktop\\EduRelay","experimental":{"useSkewCookie":false,"cacheLife":{"default":{"stale":300,"revalidate":900,"expire":4294967294},"seconds":{"stale":30,"revalidate":1,"expire":60},"minutes":{"stale":300,"revalidate":60,"expire":3600},"hours":{"stale":300,"revalidate":3600,"expire":86400},"days":{"stale":300,"revalidate":86400,"expire":604800},"weeks":{"stale":300,"revalidate":604800,"expire":2592000},"max":{"stale":300,"revalidate":2592000,"expire":4294967294}},"cacheHandlers":{},"cssChunking":true,"multiZoneDraftMode":false,"appNavFailHandling":false,"prerenderEarlyExit":true,"serverMinification":true,"serverSourceMaps":false,"linkNoTouchStart":false,"caseSensitiveRoutes":false,"clientSegmentCache":false,"clientParamParsing":false,"dynamicOnHover":false,"preloadEntriesOnStart":true,"clientRouterFilter":true,"clientRouterFilterRedirects":false,"fetchCacheKeyPrefix":"","middlewarePrefetch":"flexible","optimisticClientCache":true,"manualClientBasePath":false,"cpus":19,"memoryBasedWorkersCount":false,"imgOptConcurrency":null,"imgOptTimeoutInSeconds":7,"imgOptMaxInputPixels":268402689,"imgOptSequentialRead":null,"isrFlushToDisk":true,"workerThreads":false,"optimizeCss":false,"nextScriptWorkers":false,"scrollRestoration":false,"externalDir":false,"disableOptimizedLoading":false,"gzipSize":true,"craCompat":false,"esmExternals":true,"fullySpecified":false,"swcTraceProfiling":false,"forceSwcTransforms":false,"largePageDataBytes":128000,"typedEnv":false,"parallelServerCompiles":false,"parallelServerBuildTraces":false,"ppr":false,"authInterrupts":false,"webpackMemoryOptimizations":false,"optimizeServerReact":true,"viewTransition":false,"routerBFCache":false,"removeUncaughtErrorAndRejectionListeners":false,"validateRSCRequestHeaders":false,"staleTimes":{"dynamic":0,"static":300},"serverComponentsHmrCache":true,"staticGenerationMaxConcurrency":8,"staticGenerationMinPagesPerWorker":25,"cacheComponents":false,"inlineCss":false,"useCache":false,"globalNotFound":true,"devtoolSegmentExplorer":true,"browserDebugInfoInTerminal":false,"optimizeRouterScrolling":false,"middlewareClientMaxBodySize":10485760,"optimizePackageImports":["lucide-react","date-fns","lodash-es","ramda","antd","react-bootstrap","ahooks","@ant-design/icons","@headlessui/react","@headlessui-float/react","@heroicons/react/20/solid","@heroicons/react/24/solid","@heroicons/react/24/outline","@visx/visx","@tremor/react","rxjs","@mui/material","@mui/icons-material","recharts","react-use","effect","@effect/schema","@effect/platform","@effect/platform-node","@effect/platform-browser","@effect/platform-bun","@effect/sql","@effect/sql-mssql","@effect/sql-mysql2","@effect/sql-pg","@effect/sql-sqlite-node","@effect/sql-sqlite-bun","@effect/sql-sqlite-wasm","@effect/sql-sqlite-react-native","@effect/rpc","@effect/rpc-http","@effect/typeclass","@effect/experimental","@effect/opentelemetry","@material-ui/core","@material-ui/icons","@tabler/icons-react","mui-core","react-icons/ai","react-icons/bi","react-icons/bs","react-icons/cg","react-icons/ci","react-icons/di","react-icons/fa","react-icons/fa6","react-icons/fc","react-icons/fi","react-icons/gi","react-icons/go","react-icons/gr","react-icons/hi","react-icons/hi2","react-icons/im","react-icons/io","react-icons/io5","react-icons/lia","react-icons/lib","react-icons/lu","react-icons/md","react-icons/pi","react-icons/ri","react-icons/rx","react-icons/si","react-icons/sl","react-icons/tb","react-icons/tfi","react-icons/ti","react-icons/vsc","react-icons/wi"],"trustHostHeader":false,"isExperimentalCompile":false},"htmlLimitedBots":"[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight","bundlePagesRouterDependencies":false,"configFileName":"next.config.mjs","transpilePackages":["@edurelay/ui","@edurelay/brand","@edurelay/db"],"turbopack":{"root":"C:\\Users\\lassa\\Desktop\\EduRelay"}}
+
+process.env.__NEXT_PRIVATE_STANDALONE_CONFIG = JSON.stringify(nextConfig)
+
+require('next')
+const { startServer } = require('next/dist/server/lib/start-server')
+
+if (
+  Number.isNaN(keepAliveTimeout) ||
+
+===CMD:ls /home/ubuntu/edurelay/node_modules | grep -iE 'next|react' ; echo '---count---'; ls /home/ubuntu/edurelay/node_modules | wc -l===
+next
+react
+---count---
+2
+
+===CMD:find /home/ubuntu/edurelay -maxdepth 3 -name 'next' -type d 2>/dev/null | head===
+
+===CMD:ls -R /home/ubuntu/edurelay | head -50===
+/home/ubuntu/edurelay:
+node_modules
+package.json
+public
+server.js
+
+/home/ubuntu/edurelay/node_modules:
+next
+react
+
+/home/ubuntu/edurelay/public:
+brand
+
+/home/ubuntu/edurelay/public/brand:
+README.md
+edu-relay-icon.svg
+edu-relay-logo.svg
+

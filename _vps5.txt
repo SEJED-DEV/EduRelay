@@ -1,0 +1,79 @@
+﻿===CMD:sudo ss -tlnp 2>/dev/null | grep -E ':443 |:80 '===
+LISTEN 0      511               0.0.0.0:80         0.0.0.0:*    users:(("nginx",pid=1701587,fd=5),("nginx",pid=1701586,fd=5),("nginx",pid=1701585,fd=5),("nginx",pid=1701584,fd=5),("nginx",pid=1701583,fd=5),("nginx",pid=1701582,fd=5),("nginx",pid=1701581,fd=5))
+LISTEN 0      1024                    *:443              *:*    users:(("stalwart",pid=549162,fd=26))                                                                                                                                                               
+LISTEN 0      511                  [::]:80            [::]:*    users:(("nginx",pid=1701587,fd=6),("nginx",pid=1701586,fd=6),("nginx",pid=1701585,fd=6),("nginx",pid=1701584,fd=6),("nginx",pid=1701583,fd=6),("nginx",pid=1701582,fd=6),("nginx",pid=1701581,fd=6))
+
+===CMD:sudo lsof -i :443 2>/dev/null | head; sudo fuser 443/tcp 2>&1===
+COMMAND     PID     USER FD   TYPE   DEVICE SIZE/OFF NODE NAME
+java     497059     root 15u  IPv6 72076583      0t0  TCP mx.sejed.dev:59252->151.101.63.42:https (CLOSE_WAIT)
+java     497059     root 16u  IPv6 17528818      0t0  TCP mx.sejed.dev:50530->151.101.206.214:https (CLOSE_WAIT)
+java     497059     root 17u  IPv6 72073591      0t0  TCP mx.sejed.dev:34110->142.251.151.4:https (CLOSE_WAIT)
+java     497059     root 81u  IPv6 72151733      0t0  TCP mx.sejed.dev:56302->24.224.186.35.bc.googleusercontent.com:https (CLOSE_WAIT)
+java     497059     root 83u  IPv6 72151769      0t0  TCP mx.sejed.dev:38836->172.217.113.4:https (CLOSE_WAIT)
+java     497059     root 85u  IPv6 79161749      0t0  TCP mx.sejed.dev:34892->162.159.130.235:https (ESTABLISHED)
+java     497059     root 89u  IPv6 72073596      0t0  TCP mx.sejed.dev:37126->188.114.96.2:https (CLOSE_WAIT)
+java     497059     root 93u  IPv6 92453699      0t0  TCP mx.sejed.dev:33614->162.159.129.235:https (ESTABLISHED)
+stalwart 549162 stalwart 26u  IPv6  6045790      0t0  TCP *:https (LISTEN)
+443/tcp:             549162
+
+===CMD:ps aux | grep -iE 'nginx|caddy|traefik|httpd|apache' | grep -v grep | head -20===
+root     1085392  0.0  0.1 1308580 23416 ?       Ssl  Sep28  10:32 caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+root     1701581  0.0  0.0  15004  2636 ?        Ss   Oct23   0:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data 1701582  0.0  0.0  17308  6924 ?        S    Oct23   0:00 nginx: worker process
+www-data 1701583  0.0  0.0  17308  6920 ?        S    Oct23   0:00 nginx: worker process
+www-data 1701584  0.0  0.0  17308  6912 ?        S    Oct23   0:00 nginx: worker process
+www-data 1701585  0.0  0.0  17312  6920 ?        S    Oct23   0:00 nginx: worker process
+www-data 1701586  0.0  0.0  17308  6908 ?        S    Oct23   0:00 nginx: worker process
+www-data 1701587  0.0  0.0  17308  6892 ?        S    Oct23   0:00 nginx: worker process
+
+===CMD:ls /opt/sejed-portfolio 2>&1; cat /opt/sejed-portfolio/package.json 2>/dev/null | head -20===
+Dockerfile
+LICENSE
+README.md
+app
+deploy.tar.gz
+ecosystem.config.cjs
+eslint.config.mjs
+i18n
+node_modules
+nuxt.config.ts
+oxlint.json
+package-lock.json
+package.json
+preview.png
+public
+scripts
+server
+tsconfig.json
+{
+  "name": "sejed-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "npm run lint:oxlint && npm run lint:eslint && npm run lint:style",
+    "lint:oxlint": "oxlint --fix",
+    "lint:eslint": "eslint . --fix",
+    "lint:style": "stylelint 'app/**/*.{css,vue}'",
+    "lint:style:fix": "stylelint 'app/**/*.{css,vue}' --fix",
+    "format": "prettier --write 'app/**/*.{ts,vue,css,json}'"
+  },
+  "dependencies": {
+    "@nuxt/fonts": "^0.14.0",
+    "@nuxt/image": "^2.0.0",
+
+===CMD:sudo nginx -T 2>/dev/null | grep -i 'listen' | head -30===
+#		listen     localhost:110;
+#		listen     localhost:143;
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	# listen 443 ssl default_server;
+	# listen [::]:443 ssl default_server;
+#	listen 80;
+#	listen [::]:80;
+    listen 0.0.0.0:8088;
+

@@ -1,0 +1,27 @@
+{
+  "//": "PRIVATE & CONFIDENTIAL Code owned by EduRelay, made by Sejed TRABELSSI. Portfolio https://sejed.dev | Instagram https://instagram.com/sejed.dev | Discord https://discord.gg/sejed.dev Dev Community https://dev.to/sejed.dev | Facebook https://facebook.com/TSSEJED | Mobile +216 94 155 000 Private and confidential. Access is granted by prior written permission only. Unauthorised access, copying, modification, distribution or disclosure is prohibited and may give rise to civil and/or criminal liability under applicable law, including Tunisian intellectual-property law (Law No. 94-36) and the law on electronic exchanges (Law No. 2000-83). See NOTICE.md",
+  "name": "edurelay",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.30.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm theme && turbo run dev",
+    "theme": "node packages/brand/scripts/generate.mjs",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "turbo run typecheck",
+    "headers": "node scripts/add-headers.mjs",
+    "headers:check": "node scripts/add-headers.mjs --check",
+    "release:hash": "node scripts/hash-release.mjs"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.9.0"
+  }
+}

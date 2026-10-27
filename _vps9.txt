@@ -1,0 +1,7 @@
+﻿===CMD:find / -path '*caddy*' -name '*.crt' 2>/dev/null | head; find / -path '*caddy*' -name '*.key' 2>/dev/null | head===
+
+===CMD:ls -la /root/.local/share/caddy 2>&1; find / -name 'certificates' -type d 2>/dev/null | head===
+ls: cannot open file '/root/.local/share/caddy': Permission denied
+
+===CMD:find / -name '*.sejed.dev*' 2>/dev/null | head===
+

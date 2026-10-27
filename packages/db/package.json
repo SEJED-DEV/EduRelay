@@ -1,0 +1,27 @@
+{
+  "//": "PRIVATE & CONFIDENTIAL Code owned by EduRelay, made by Sejed TRABELSSI. Portfolio https://sejed.dev | Instagram https://instagram.com/sejed.dev | Discord https://discord.gg/sejed.dev Dev Community https://dev.to/sejed.dev | Facebook https://facebook.com/TSSEJED | Mobile +216 94 155 000 Private and confidential. Access is granted by prior written permission only. Unauthorised access, copying, modification, distribution or disclosure is prohibited and may give rise to civil and/or criminal liability under applicable law, including Tunisian intellectual-property law (Law No. 94-36) and the law on electronic exchanges (Law No. 2000-83). See NOTICE.md",
+  "name": "@edurelay/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./env": "./src/env.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@edurelay/brand": "workspace:*",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.45.0",
+    "server-only": "^0.0.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "typescript": "^5.9.0"
+  }
+}

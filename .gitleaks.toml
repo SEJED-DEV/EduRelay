@@ -1,0 +1,76 @@
+# ==============================================================================
+# EduRelay — School Supplies · Passed Forward
+# Copyright (c) 2026 EduRelay. All rights reserved.
+#
+# PRIVATE REPOSITORY — CONFIDENTIAL.
+# This file is part of a private, proprietary codebase. Access is granted by
+# prior written permission from the owner only. If you are reading this without
+# that permission you must stop now and delete every copy: you may not view,
+# copy, modify, distribute or disclose this file.
+# Unauthorised access or use may give rise to civil and/or criminal liability
+# under applicable law, including Tunisian intellectual-property law (Law No.
+# 94-36) and the law on electronic exchanges (Law No. 2000-83).
+#
+# Code owned by EduRelay · Made by Sejed TRABELSSI
+#   Portfolio      https://sejed.dev
+#   Instagram      https://instagram.com/sejed.dev
+#   Discord        https://discord.gg/sejed.dev
+#   Dev Community  https://dev.to/sejed.dev
+#   Facebook       https://facebook.com/TSSEJED
+#   Mobile         +216 94 155 000
+#
+# @file     .gitleaks.toml
+# @summary  Secret-scanning rules, including Supabase and payment-gateway keys.
+# @marker   EDURELAY-HEADER
+# ==============================================================================
+
+# Gitleaks configuration — EduRelay
+# Run: gitleaks git --config .gitleaks.toml --redact --verbose
+# CI runs the same command on every push and on a nightly full-history scan.
+# Docs: https://github.com/gitleaks/gitleaks
+
+[extend]
+# Keep the upstream ruleset (AWS, Stripe, GitHub, private keys, …) and add
+# project-specific ones below.
+useDefault = true
+
+[[rules]]
+id = "supabase-service-role-key"
+description = "Supabase service-role JWT or sb_secret_* key. Full database access."
+regex = '''(?i)(service[_-]?role[^\n]{0,40})?(sb_secret_[A-Za-z0-9_-]{20,}|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,})'''
+entropy = 3.5
+keywords = ["service_role", "sb_secret", "supabase"]
+
+[[rules]]
+id = "supabase-db-url"
+description = "Postgres connection string with an embedded password."
+regex = '''postgres(ql)?://[^\s:@/]+:[^\s:@/]{8,}@'''
+keywords = ["postgres://", "postgresql://"]
+
+[[rules]]
+id = "tunisian-bank-rib"
+description = "Tunisian RIB (20 digits) — payout destination, must never be in code."
+regex = '''\b\d{20}\b'''
+keywords = ["rib", "iban", "payout", "bank"]
+
+[[rules]]
+id = "konnect-paymee-secret"
+description = "Payment gateway secret or webhook signing key."
+regex = '''(?i)(konnect|paymee)[_-]?(api|secret|webhook)[_-]?(key|token)?\s*[:=]\s*["']?[A-Za-z0-9_\-\.]{16,}'''
+keywords = ["konnect", "paymee"]
+
+# ---------------------------------------------------------------------------
+# Allowlist — placeholder values and fixtures only. Never add a real secret.
+# ---------------------------------------------------------------------------
+[allowlist]
+description = "Documented placeholders and synthetic test data."
+paths = [
+  '''(^|/)\.env\.example$''',
+  '''(^|/)docs/''',
+  '''(^|/)README\.md$''',
+  '''(^|/)pnpm-lock\.yaml$''',
+]
+regexes = [
+  '''(?i)(your[-_]|<your|changeme|placeholder|example\.com|xxx+|\.\.\.)''',
+  '''sb_publishable_[A-Za-z0-9_-]+''', # publishable keys are public by design
+]

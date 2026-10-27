@@ -1,0 +1,40 @@
+﻿===CMD:which caddy; find / -name 'Caddyfile' 2>/dev/null; find / -name 'caddy' -type f 2>/dev/null | head===
+/opt/shci/Caddyfile
+/opt/shci/matrix/Caddyfile
+/opt/supabase/volumes/proxy/caddy/Caddyfile
+
+===CMD:ps aux | grep caddy | grep -v grep===
+root     1085392  0.0  0.1 1308580 23416 ?       Ssl  Sep28  10:32 caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+
+python : Traceback (most recent call last):
+At line:17 char:54
++ ... ing UTF8 "$env:TEMP\vps7.py"; python "$env:TEMP\vps7.py" 2>&1 | Out-F ...
++                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\lassa\AppData\Local\Temp\vps7.py", line 14, in <module>
+    run("cat /proc/1085392/cmdline 2>/dev/null | tr '\0' ' '; echo")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lassa\AppData\Local\Temp\vps7.py", line 6, in run
+    stdin,stdout,stderr=client.exec_command(cmd)
+                        ~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\lassa\AppData\Roaming\Python\Python313\site-packages\paramiko\client.py", line 554, in exec_command
+    chan.exec_command(command)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lassa\AppData\Roaming\Python\Python313\site-packages\paramiko\channel.py", line 70, in _check
+    return func(self, *args, **kwds)
+  File "C:\Users\lassa\AppData\Roaming\Python\Python313\site-packages\paramiko\channel.py", line 255, in exec_command
+    self._wait_for_event()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lassa\AppData\Roaming\Python\Python313\site-packages\paramiko\channel.py", line 1224, in 
+_wait_for_event
+    raise e
+  File "C:\Users\lassa\AppData\Roaming\Python\Python313\site-packages\paramiko\transport.py", line 2045, in run
+    ptype, m = self.packetizer.read_message()
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lassa\AppData\Roaming\Python\Python313\site-packages\paramiko\packet.py", line 496, in read_message
+    header = self.read_all(self.__block_size_in, check_rekey=True)
+  File "C:\Users\lassa\AppData\Roaming\Python\Python313\site-packages\paramiko\packet.py", line 324, in read_all
+    raise EOFError()
+EOFError

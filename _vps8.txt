@@ -1,0 +1,156 @@
+﻿===CMD:cat /opt/shci/Caddyfile===
+{$HOSTNAME} {
+	route /.well-known/stoat {
+		uri strip_prefix /.well-known/stoat
+		header {
+			Access-Control-Allow-Origin *
+		}
+		file_server {
+			root /stoat.json
+		}
+	}
+
+	route /api* {
+		uri strip_prefix /api
+		reverse_proxy http://api:14702 {
+			header_down Location "^/" "/api/"
+		}
+	}
+
+	route /ws {
+		uri strip_prefix /ws
+		reverse_proxy http://events:14703 {
+			header_down Location "^/" "/ws/"
+		}
+	}
+
+	route /autumn* {
+		uri strip_prefix /autumn
+		reverse_proxy http://autumn:14704 {
+			header_down Location "^/" "/autumn/"
+		}
+	}
+
+	route /january* {
+		uri strip_prefix /january
+		reverse_proxy http://january:14705 {
+			header_down Location "^/" "/january/"
+		}
+	}
+
+	route /gifbox* {
+		uri strip_prefix /gifbox
+		reverse_proxy http://gifbox:14706 {
+			header_down Location "^/" "/gifbox/"
+		}
+	}
+
+	route /livekit* {
+		uri strip_prefix /livekit
+		reverse_proxy http://livekit:7880 {
+			header_down Location "^/" "/livekit/"
+		}
+	}
+
+	route /ingress* {
+		uri strip_prefix /ingress
+		reverse_proxy http://voice-ingress:8500 {
+			header_down Location "^/" "/ingress/"
+		}
+	}
+
+	# sirv-cli does not know the .ico extension and emits an empty
+	# Content-Type, which makes browsers reject the favicon. Force a correct
+	# type on .ico responses, and map the legacy /favicon.ico path onto the
+	# current icon so old clients and crawlers get a 200.
+	# ---------------------------------------------------------------------
+	# IFRC platform service (Go). One binary, two mounts, no client JS.
+	#   /admin  -> operator panel, session-authenticated
+	#   /emoji  -> local unicode-emoji mirror (replaces static.stoat.chat)
+	# ---------------------------------------------------------------------
+	route /admin* {
+		reverse_proxy http://platform:8090
+	}
+
+	route /emoji* {
+		reverse_proxy http://platform:8090
+	}
+
+	@favicon_ico path /favicon.ico
+	handle @favicon_ico {
+		rewrite * /assets/web/icon-v3.ico
+	}
+
+	@ico path *.ico
+	header @ico Content-Type "image/x-icon"
+
+	reverse_proxy http://web:5000
+}
+
+===CMD:ls -la /opt/shci===
+total 252
+drwx------  9 ubuntu ubuntu  4096 Sep 29 11:02 .
+drwxr-xr-x 10 root   root    4096 Oct 20 21:50 ..
+-rw-rw-r--  1 ubuntu ubuntu    14 Sep 28 06:14 .env
+-rw-rw-r--  1 ubuntu ubuntu   137 Sep 28 06:14 .env.web
+drwx------  4 ubuntu ubuntu  4096 Sep 28 06:14 .github
+-rw-rw-r--  1 ubuntu ubuntu   102 Sep 28 06:14 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  1990 Sep 28 16:31 Caddyfile
+-rw-rw-r--  1 ubuntu ubuntu  1533 Sep 28 16:30 Caddyfile.bak-platform
+-rw-rw-r--  1 ubuntu ubuntu  1113 Sep 28 06:14 Caddyfile.bak.1790580482
+-rw-rw-r--  1 ubuntu ubuntu  1113 Sep 28 07:28 Caddyfile.bak.1790580496
+-rw-rw-r--  1 ubuntu ubuntu  7595 Sep 28 06:14 Guides.md
+-rw-rw-r--  1 ubuntu ubuntu 34468 Sep 28 06:14 LICENSE
+-rw-rw-r--  1 ubuntu ubuntu 15545 Sep 28 06:14 README.md
+-rw-r--r--  1 root   root   11117 Sep 28 17:48 ROADMAP.md
+-rw-rw-r--  1 ubuntu ubuntu   642 Sep 28 06:14 Revolt.toml
+drwxrwxr-x  6 ubuntu ubuntu  4096 Sep 28 16:47 branding
+-rw-rw-r--  1 ubuntu ubuntu   480 Sep 28 06:17 cloudflared.compose.yml
+-rw-rw-r--  1 ubuntu ubuntu  2524 Sep 28 16:17 compose.override.yml
+-rw-r--r--  1 root   root     149 Sep 28 06:56 compose.override.yml.bak-branding
+-rw-rw-r--  1 ubuntu ubuntu  2504 Sep 28 16:17 compose.override.yml.bak-pins
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 17:45 compose.platform.yml
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 17:44 compose.platform.yml.bak-sha256:2ac1a77d90698b50d436bb644a3a041c046e0f62431fa8076f75c07ce1dc3ff4
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 16:40 compose.platform.yml.bak-sha256:382fcc4cc80d44c953d7d67392fc846e785eb46e319041bac91d3b8efbd7c9a8
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 17:39 compose.platform.yml.bak-sha256:50faad0b31491d2df3a5b0b579f6afbff966deef790065088aab91ec6c6e7bdb
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 16:30 compose.platform.yml.bak-sha256:615b3ab72dbb2364f0fe59284679b74d03b952ddbd49efe4778ab1834dc9d573
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 17:42 compose.platform.yml.bak-sha256:992e831934205fb07d0fdf07a4e081f8e28766c3240d88b60519b1f30d2c05d3
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 16:44 compose.platform.yml.bak-sha256:a22ab609462ba54d3f35ae2668c02a74fcc3629da36538f26e88c3c0e3627dbf
+-rw-rw-r--  1 ubuntu ubuntu   507 Sep 28 16:45 compose.platform.yml.bak-sha256:d95946c4c0148203f3c9e4e087ec93db5edc40a18b03ece8318977aeda74763e
+-rw-rw-r--  1 ubuntu ubuntu  5140 Sep 28 06:14 compose.yml
+drwxr-xr-x  7 root   root    4096 Sep 28 06:15 data
+-rwxr-xr-x  1 root   root    2130 Sep 28 16:48 deploy_platform.sh
+-rwxrwxr-x  1 ubuntu ubuntu   862 Sep 29 11:02 find-cf-creds.sh
+-rwxrwxr-x  1 ubuntu ubuntu 11216 Sep 28 06:14 generate_config.sh
+-rw-r--r--  1 root   root    1961 Sep 28 16:48 image-digests.txt
+-rw-rw-r--  1 ubuntu ubuntu   306 Sep 28 06:14 livekit.yml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Sep 29 10:52 matrix
+drwx------  2 ubuntu ubuntu  4096 Sep 28 06:14 migrations
+drwxr-x---  3 shci   shci    4096 Sep 28 17:45 platform
+drwxr-xr-x  3 root   root    4096 Sep 28 16:13 registry
+-rwxr-xr-x  1 root   root    4845 Sep 28 16:48 repoint_emoji.py
+-rw-------  1 ubuntu ubuntu  2734 Sep 28 06:14 secrets.env
+-rw-rw-r--  1 ubuntu ubuntu  2034 Sep 28 06:14 secrets.env.example
+-rw-rw-r--  1 ubuntu ubuntu    39 Sep 28 06:14 stoat.json
+-rwxr-xr-x  1 root   root    4947 Sep 28 16:48 vendor_rnnoise.py
+
+===CMD:cat /opt/supabase/volumes/proxy/caddy/Caddyfile 2>/dev/null | head -40===
+{$PROXY_DOMAIN} {
+    @supabase_api path /auth/v1/* /rest/v1/* /graphql/v1 /realtime/v1/* /storage/v1/* /functions/v1/* /mcp /sso/* /.well-known/oauth-authorization-server/auth/v1
+
+    handle @supabase_api {
+        reverse_proxy api-gw:8000
+    }
+
+    handle {
+        basic_auth {
+            # PROXY_AUTH_PASSWORD is overwritten with the bcrypt on startup
+            {$PROXY_AUTH_USERNAME} {$PROXY_AUTH_PASSWORD}
+        }
+
+        reverse_proxy studio:3000
+    }
+
+    header -server
+}
+

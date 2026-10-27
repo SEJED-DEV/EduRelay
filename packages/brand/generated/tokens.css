@@ -1,0 +1,163 @@
+/**
+ * ==============================================================================
+ * EduRelay — School Supplies · Passed Forward
+ * Copyright (c) 2026 EduRelay. All rights reserved.
+ *
+ * PRIVATE REPOSITORY — CONFIDENTIAL.
+ * This file is part of a private, proprietary codebase. Access is granted by
+ * prior written permission from the owner only. If you are reading this without
+ * that permission you must stop now and delete every copy: you may not view,
+ * copy, modify, distribute or disclose this file.
+ * Unauthorised access or use may give rise to civil and/or criminal liability
+ * under applicable law, including Tunisian intellectual-property law (Law No.
+ * 94-36) and the law on electronic exchanges (Law No. 2000-83).
+ *
+ * Code owned by EduRelay · Made by Sejed TRABELSSI
+ *   Portfolio      https://sejed.dev
+ *   Instagram      https://instagram.com/sejed.dev
+ *   Discord        https://discord.gg/sejed.dev
+ *   Dev Community  https://dev.to/sejed.dev
+ *   Facebook       https://facebook.com/TSSEJED
+ *   Mobile         +216 94 155 000
+ *
+ * @file     packages/brand/generated/tokens.css
+ * @summary  Generated design tokens (Tailwind @theme) — do not edit by hand.
+ * @marker   EDURELAY-HEADER
+ * ==============================================================================
+ */
+
+/* AUTO-GENERATED from packages/brand/brand.config.json. Run `pnpm theme`. */
+
+/* Tailwind v4 theme. Each key becomes a utility:
+   --color-*  -> bg-brand, text-accent-dark, border-line
+   --font-*   -> font-sans, font-serif, font-display, font-arabic
+   --text-*   -> text-display, text-h1 ... (fluid clamp sizes)
+   --leading-* / --tracking-* -> leading-heading, tracking-display
+   --ease-*   -> ease-out, ease-in-out, ease-cinematic
+
+   THEME: dark is the product, not a preference. The shipped palette is
+   emitted here as the default, so no OS media query can flip the site.
+   The anchor (light) palette is opt-in with [data-theme='light'] below,
+   for print, e-mail templates and the design reference page. */
+@theme {
+  --color-brand: #43D9A6;
+  --color-brand-dark: #A9F2D8;
+  --color-brand-light: #0C2A22;
+  --color-accent: #F7B65C;
+  --color-accent-dark: #FFD9A8;
+  --color-ink: #EAF4EF;
+  --color-muted: #9AAEA5;
+  --color-canvas: #060D0B;
+  --color-surface: #0A1512;
+  --color-elevated: #0F1E19;
+  --color-line: #1D2F28;
+  --color-on-brand: #04231A;
+  --color-on-accent: #2A1804;
+  --color-mist: #E1F5EE;
+  --color-on-mist: #0A241C;
+  --color-danger: #FF8F8F;
+  --color-on-danger: #2A0A0A;
+  --color-success: #5FE3A1;
+  --font-sans: var(--font-latin-loaded), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --font-serif: var(--font-serif-loaded), 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, 'Times New Roman', serif;
+  --font-display: var(--font-latin-loaded), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --font-arabic: var(--font-arabic-loaded), 'Noto Kufi Arabic', 'Segoe UI', Tahoma, 'Geeza Pro', 'Arabic Typesetting', sans-serif;
+  --font-mono: var(--font-mono-loaded), ui-monospace, SFMono-Regular, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
+  --text-display: clamp(2.9rem, 1.15rem + 7vw, 6.5rem);
+  --text-h1: clamp(2.25rem, 1.35rem + 3.9vw, 3.75rem);
+  --text-h2: clamp(1.85rem, 1.25rem + 2.4vw, 2.85rem);
+  --text-h3: clamp(1.4rem, 1.15rem + 1vw, 1.9rem);
+  --text-h4: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --text-small: 0.875rem;
+  --text-micro: 0.75rem;
+  --leading-display: 0.98;
+  --leading-heading: 1.12;
+  --leading-snug: 1.3;
+  --leading-body: 1.65;
+  --leading-loose: 1.75;
+  --tracking-display: -0.028em;
+  --tracking-heading: -0.02em;
+  --tracking-body: 0em;
+  --tracking-caps: 0.14em;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark is the default surface. `color-scheme` keeps native controls, form
+   fields and scrollbars in the same key as the page. */
+:root {
+  color-scheme: dark;
+  --brand: #43D9A6;
+  --brand-dark: #A9F2D8;
+  --brand-light: #0C2A22;
+  --accent: #F7B65C;
+  --accent-dark: #FFD9A8;
+  --ink: #EAF4EF;
+  --muted: #9AAEA5;
+  --canvas: #060D0B;
+  --surface: #0A1512;
+  --elevated: #0F1E19;
+  --line: #1D2F28;
+  --on-brand: #04231A;
+  --on-accent: #2A1804;
+  --mist: #E1F5EE;
+  --on-mist: #0A241C;
+  --danger: #FF8F8F;
+  --on-danger: #2A0A0A;
+  --success: #5FE3A1;
+  --text-main: #EAF4EF;
+  --text-sub: #9AAEA5;
+  --measure-body: 68ch;
+  --measure-tight: 46ch;
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 480ms;
+  --duration-reveal: 760ms;
+}
+
+/* Anchor palette opt-in. Same variable names, so every utility and every
+   inline style adapts without a second class set. Used by print styles,
+   e-mail templates and the /design reference. */
+[data-theme='light'] {
+  color-scheme: light;
+  --color-brand: #1D9E75;
+  --color-brand-dark: #085041;
+  --color-brand-light: #E1F5EE;
+  --color-accent: #EF9F27;
+  --color-accent-dark: #633806;
+  --color-ink: #2C2C2A;
+  --color-muted: #888780;
+  --color-canvas: #FBFAF7;
+  --color-surface: #FFFFFF;
+  --color-elevated: #F4F2EC;
+  --color-line: #E7E4DA;
+  --color-on-brand: #04241A;
+  --color-on-accent: #2A1804;
+  --color-mist: #E1F5EE;
+  --color-on-mist: #0A241C;
+  --color-danger: #DC2626;
+  --color-on-danger: #FFFFFF;
+  --color-success: #16A34A;
+  --brand: #1D9E75;
+  --brand-dark: #085041;
+  --brand-light: #E1F5EE;
+  --accent: #EF9F27;
+  --accent-dark: #633806;
+  --ink: #2C2C2A;
+  --muted: #888780;
+  --canvas: #FBFAF7;
+  --surface: #FFFFFF;
+  --elevated: #F4F2EC;
+  --line: #E7E4DA;
+  --on-brand: #04241A;
+  --on-accent: #2A1804;
+  --mist: #E1F5EE;
+  --on-mist: #0A241C;
+  --danger: #DC2626;
+  --on-danger: #FFFFFF;
+  --success: #16A34A;
+  --text-main: #2C2C2A;
+  --text-sub: #888780;
+}

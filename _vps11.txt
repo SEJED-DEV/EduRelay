@@ -1,0 +1,35 @@
+﻿uploaded
+===CMD:mkdir -p /home/ubuntu/edurelay && tar -xzf /home/ubuntu/edurelay-deploy.tar.gz -C /home/ubuntu/edurelay && ls /home/ubuntu/edurelay===
+node_modules
+package.json
+public
+server.js
+
+ERR:tar: Ignoring unknown extended header keyword 'LIBARCHIVE.symlinktype'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.symlinktype'
+
+===CMD:curl -L --output /tmp/cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && sudo dpkg -i /tmp/cloudflared.deb && cloudflared --version===
+Selecting previously unselected package cloudflared.
+(Reading database ... 139470 files and directories currently installed.)
+Preparing to unpack /tmp/cloudflared.deb ...
+Unpacking cloudflared (2026.10.4) ...
+Setting up cloudflared (2026.10.4) ...
+Processing triggers for man-db (2.13.1-1build1) ...
+cloudflared version 2026.10.4 (built 2026-10-26-11:12 UTC)
+
+ERR:  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+
+  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0
+
+  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0
+
+  0      0   0      0   0      0      0      0                              0
+100 18.98M 100 18.98M   0      0 30.62M      0                              0
+100 18.98M 100 18.98M   0      0 30.61M      0                              0
+100 18.98M 100 18.98M   0      0 30.60M      0                              0
+

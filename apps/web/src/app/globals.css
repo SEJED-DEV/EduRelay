@@ -1,0 +1,413 @@
+/**
+ * ==============================================================================
+ * EduRelay — School Supplies · Passed Forward
+ * Copyright (c) 2026 EduRelay. All rights reserved.
+ *
+ * PRIVATE REPOSITORY — CONFIDENTIAL.
+ * This file is part of a private, proprietary codebase. Access is granted by
+ * prior written permission from the owner only. If you are reading this without
+ * that permission you must stop now and delete every copy: you may not view,
+ * copy, modify, distribute or disclose this file.
+ * Unauthorised access or use may give rise to civil and/or criminal liability
+ * under applicable law, including Tunisian intellectual-property law (Law No.
+ * 94-36) and the law on electronic exchanges (Law No. 2000-83).
+ *
+ * Code owned by EduRelay · Made by Sejed TRABELSSI
+ *   Portfolio      https://sejed.dev
+ *   Instagram      https://instagram.com/sejed.dev
+ *   Discord        https://discord.gg/sejed.dev
+ *   Dev Community  https://dev.to/sejed.dev
+ *   Facebook       https://facebook.com/TSSEJED
+ *   Mobile         +216 94 155 000
+ *
+ * @file     apps/web/src/app/globals.css
+ * @summary  Global stylesheet: dark cinema surface, typography, motion, RTL.
+ * @marker   EDURELAY-HEADER
+ * ==============================================================================
+ */
+
+/**
+ * Global stylesheet.
+ *
+ * Tailwind v4 is configured in CSS, not JS: the @theme block is imported from
+ * the brand package, where it is GENERATED from
+ * packages/brand/brand.config.json. Edit the palette there and run `pnpm theme`.
+ *
+ * The product is dark-first: `tokens.css` emits the dark roster as the default
+ * for every `--color-*` variable, so no `prefers-color-scheme` query can flip
+ * the site. This file adds the atmosphere the tokens cannot express — ambient
+ * light, glass, film grain, the interactive lift — plus the motion system.
+ *
+ * Everything decorative lives behind `aria-hidden` in the markup or in a
+ * pseudo-element here, and every animation collapses under the reduced-motion
+ * reset at the end of @layer base.
+ */
+
+@import "tailwindcss";
+@import "@edurelay/brand/tokens.css";
+
+/* Classes used inside the workspace UI package must be scanned explicitly. */
+@source "../../../../packages/ui/src";
+
+/* `dark:` follows the document flag (`data-theme="dark"`), not the operating
+   system. The palette is dark by default, so variants exist only for the
+   opt-in light preview, never to follow a visitor's OS. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* The reduced-motion reset must beat component animations, so !important is
+   deliberate here. */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    background-color: var(--color-canvas);
+    scrollbar-color: color-mix(in oklab, var(--color-brand) 34%, var(--color-line))
+      var(--color-canvas);
+    scrollbar-width: thin;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-canvas);
+    /* Two ambient lights instead of one flat fill: a mint wash from the
+       start edge and a faint amber counter-light at the end edge. The page
+       then reads as a lit room rather than a dark rectangle. */
+    background-image:
+      radial-gradient(
+        84rem 52rem at 8% -14%,
+        color-mix(in oklab, var(--color-brand) 13%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
+        64rem 44rem at 104% -6%,
+        color-mix(in oklab, var(--color-accent) 8%, transparent),
+        transparent 58%
+      );
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Arabic gets its own paired typeface and a taller default leading; the
+     script has deeper ascenders/descenders and cannot share Latin metrics. */
+  html[lang="ar"] body {
+    font-family: var(--font-arabic);
+    line-height: var(--leading-loose);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-sans);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
+  }
+
+  /* The editorial serif is Latin-only: Instrument Serif has no Arabic coverage,
+     so Arabic display type falls back to Plex Arabic and drops the Latin
+     tracking, which breaks joining forms. */
+  html[lang="ar"] :where(.font-serif, h1, h2, h3, h4) {
+    font-family: var(--font-arabic);
+    letter-spacing: 0;
+  }
+
+  html[lang="ar"] :where(h1, h2) {
+    line-height: var(--leading-snug);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-brand) 32%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      /* biome-ignore lint/complexity/noImportantStyles: must override component animations */
+      animation-duration: 0.01ms !important;
+      /* biome-ignore lint/complexity/noImportantStyles: must override component animations */
+      animation-iteration-count: 1 !important;
+      /* biome-ignore lint/complexity/noImportantStyles: must override component transitions */
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media print {
+    html,
+    body {
+      background: #fff;
+      color: #14140f;
+    }
+  }
+}
+
+@layer components {
+  /* Long-form copy never exceeds a comfortable measure. */
+  .measure {
+    max-width: var(--measure-body);
+  }
+
+  /* The default elevated surface: a barely-there vertical gradient so panels
+     catch light at the top edge, plus a hairline that reads on black. */
+  .surface-card {
+    border: 1px solid color-mix(in oklab, var(--color-line) 92%, transparent);
+    background-image: linear-gradient(
+      165deg,
+      color-mix(in oklab, var(--color-surface) 96%, transparent),
+      color-mix(in oklab, var(--color-canvas) 78%, transparent)
+    );
+    box-shadow:
+      inset 0 1px 0 0 color-mix(in oklab, var(--color-ink) 5%, transparent),
+      0 40px 80px -64px color-mix(in oklab, var(--color-canvas) 90%, transparent);
+  }
+
+  /* Frosted panel for floating chrome (header, chips, overlay cards). */
+  .glass {
+    border: 1px solid color-mix(in oklab, var(--color-ink) 8%, transparent);
+    background-color: color-mix(in oklab, var(--color-surface) 58%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(130%);
+    backdrop-filter: blur(20px) saturate(130%);
+  }
+
+  /* Mint light bleeding over the top edge of a panel. */
+  .edge-light {
+    position: relative;
+  }
+
+  .edge-light::before {
+    position: absolute;
+    inset-inline: 12%;
+    top: -1px;
+    height: 1px;
+    content: "";
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in oklab, var(--color-brand) 55%, transparent),
+      transparent
+    );
+  }
+
+  /* Film grain. Applied to large cinematic bands only; opacity stays low
+     enough that it registers as texture, never as dots. */
+  .grain {
+    position: relative;
+  }
+
+  .grain::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    content: "";
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  /* Ink-to-mint gradient for the one headline allowed to glow. */
+  .text-gradient {
+    background-image: linear-gradient(
+      118deg,
+      var(--color-ink) 8%,
+      var(--color-ink) 52%,
+      color-mix(in oklab, var(--color-brand) 88%, var(--color-ink)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .display-glow {
+    text-shadow: 0 0 72px color-mix(in oklab, var(--color-brand) 22%, transparent);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Motion system
+   Tokens come from packages/brand (--duration-*, --ease-*). Nothing here is
+   load-bearing: if animation is disabled the final state is already the design.
+   The prefers-reduced-motion reset in @layer base collapses every duration, so
+   these classes remain safe for vestibular disorders.
+   -------------------------------------------------------------------------- */
+@layer utilities {
+  /* The prerendered global 404 is one static document shared by both locales;
+     an inline script stamps `data-locale` before first paint. Without JS both
+     blocks remain readable rather than one silently disappearing. */
+  [data-locale="ar"] .locale-fr,
+  [data-locale="fr"] .locale-ar {
+    display: none;
+  }
+
+  /* Arabic joining forms cannot carry Latin tracking: every label that opts
+     into a `tracking-*` step or a mono face gets its letter-spacing removed.
+     This lives in the utilities layer because that is where those steps are
+     generated — a base-layer reset would lose the cascade. */
+  html[lang="ar"] :where(.tracking-display, .tracking-heading, .tracking-caps, .font-mono) {
+    letter-spacing: 0;
+  }
+
+  @keyframes edurelay-fade-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes edurelay-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes edurelay-shimmer {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes edurelay-float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -7px, 0);
+    }
+  }
+
+  @keyframes edurelay-drift {
+    0% {
+      transform: translate3d(-2%, 0, 0) scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: translate3d(3%, -4%, 0) scale(1.12);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate3d(-1%, 2%, 0) scale(1.04);
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes edurelay-pulse-soft {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.35);
+    }
+  }
+
+  @keyframes edurelay-sweep {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 200% 50%;
+    }
+  }
+
+  .animate-fade-up {
+    animation: edurelay-fade-up var(--duration-reveal) var(--ease-cinematic) both;
+  }
+
+  .animate-fade-in {
+    animation: edurelay-fade-in var(--duration-base) var(--ease-out) both;
+  }
+
+  .animate-float {
+    animation: edurelay-float 7s var(--ease-in-out) infinite;
+  }
+
+  .animate-drift {
+    animation: edurelay-drift 22s var(--ease-in-out) infinite alternate;
+  }
+
+  .animate-pulse-soft {
+    animation: edurelay-pulse-soft 2.8s var(--ease-in-out) infinite;
+  }
+
+  /* Set --stagger on each child (0, 1, 2 …) to cascade an entrance. */
+  .stagger-item {
+    animation-delay: calc(var(--stagger, 0) * 90ms);
+  }
+
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: color-mix(in oklab, var(--color-elevated) 88%, transparent);
+  }
+
+  .skeleton::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--color-brand) 10%, transparent),
+      color-mix(in oklab, var(--color-ink) 6%, transparent),
+      transparent
+    );
+    transform: translateX(-100%);
+    animation: edurelay-shimmer 1.6s var(--ease-in-out) infinite;
+  }
+
+  .card-lift {
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out),
+      border-color var(--duration-base) var(--ease-out),
+      background-color var(--duration-base) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .card-lift:hover {
+      transform: translate3d(0, -6px, 0);
+      border-color: color-mix(in oklab, var(--color-brand) 42%, var(--color-line));
+      box-shadow:
+        0 1px 0 0 color-mix(in oklab, var(--color-ink) 7%, transparent) inset,
+        0 34px 70px -44px color-mix(in oklab, var(--color-brand) 34%, transparent);
+    }
+  }
+}

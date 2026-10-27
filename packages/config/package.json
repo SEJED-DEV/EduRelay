@@ -1,0 +1,10 @@
+{
+  "//": "PRIVATE & CONFIDENTIAL Code owned by EduRelay, made by Sejed TRABELSSI. Portfolio https://sejed.dev | Instagram https://instagram.com/sejed.dev | Discord https://discord.gg/sejed.dev Dev Community https://dev.to/sejed.dev | Facebook https://facebook.com/TSSEJED | Mobile +216 94 155 000 Private and confidential. Access is granted by prior written permission only. Unauthorised access, copying, modification, distribution or disclosure is prohibited and may give rise to civil and/or criminal liability under applicable law, including Tunisian intellectual-property law (Law No. 94-36) and the law on electronic exchanges (Law No. 2000-83). See NOTICE.md",
+  "name": "@edurelay/config",
+  "version": "0.1.0",
+  "private": true,
+  "files": [
+    "tsconfig.nextjs.json",
+    "tsconfig.react-library.json"
+  ]
+}

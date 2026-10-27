@@ -1,0 +1,143 @@
+<!--
+  ==============================================================================
+  EduRelay — School Supplies · Passed Forward
+  Copyright (c) 2026 EduRelay. All rights reserved.
+  
+  PRIVATE REPOSITORY — CONFIDENTIAL.
+  This file is part of a private, proprietary codebase. Access is granted by
+  prior written permission from the owner only. If you are reading this without
+  that permission you must stop now and delete every copy: you may not view,
+  copy, modify, distribute or disclose this file.
+  Unauthorised access or use may give rise to civil and/or criminal liability
+  under applicable law, including Tunisian intellectual-property law (Law No.
+  94-36) and the law on electronic exchanges (Law No. 2000-83).
+  
+  Code owned by EduRelay · Made by Sejed TRABELSSI
+    Portfolio      https://sejed.dev
+    Instagram      https://instagram.com/sejed.dev
+    Discord        https://discord.gg/sejed.dev
+    Dev Community  https://dev.to/sejed.dev
+    Facebook       https://facebook.com/TSSEJED
+    Mobile         +216 94 155 000
+  
+  @file     CONTRIBUTING.md
+  @summary  Working agreement and the IP assignment every contributor signs.
+  @marker   EDURELAY-HEADER
+  ==============================================================================
+-->
+
+# Contributing
+
+This is a private, proprietary repository. Do not accept contributions — code,
+design, copy or data — from anyone who has not signed the assignment below.
+
+## Before anyone writes a line
+
+1. The contributor signs the **Intellectual Property Assignment** (section 5).
+2. The contributor signs an NDA if they will see production data or credentials.
+3. The contributor gets a scoped GitHub account, 2FA enforced, no admin rights.
+4. Their SSH or GPG key is added; every commit must be signed (section 4).
+
+No contract, no commit.
+
+## Working agreement
+
+- Branch names: `feat/<slug>`, `fix/<slug>`, `chore/<slug>`, `docs/<slug>`.
+- Commits follow Conventional Commits; one logical change per commit.
+- `pnpm lint`, `pnpm typecheck`, `pnpm headers:check` must pass before a PR.
+- Never force-push a shared branch. Never rewrite published history.
+- Never add a dependency without checking its licence and its install scripts.
+- Never commit real data, keys, screenshots of production, or user messages.
+
+## Definition of done
+
+- Copy exists in both `fr.json` and `ar.json`; Arabic is RTL-checked.
+- Money is integer millimes; no float arithmetic anywhere.
+- New tables have RLS policies and an index that matches the query pattern.
+- New files carry the ownership banner (`pnpm headers`).
+- The change is described in the PR body: what, why, risk, rollback.
+
+## 1. Confidentiality
+
+Everything in this repository is confidential. Do not paste source, schema,
+screenshots or copy into public tools, public gists, AI chat services that retain
+data, or job applications.
+
+## 2. Licence and ownership
+
+All work produced for EduRelay is a work made for hire and is assigned to
+EduRelay. The contributor keeps no right to reuse it elsewhere.
+
+## 3. Brand assets
+
+Do not redraw, trace, "clean up", re-export or optimise the brand SVGs. Their
+metadata is part of the authorship record. If a new size is needed, ask for it.
+
+## 4. Commit signing
+
+```bash
+# SSH signing (simplest on Windows)
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true
+git config --global tag.gpgsign true
+```
+
+Every commit and tag must be signed. Unsigned commits are rejected.
+
+## 5. Intellectual Property Assignment Agreement
+
+> **INTELLECTUAL PROPERTY ASSIGNMENT AGREEMENT**
+>
+> This Agreement is made between **EduRelay** ("the Company") and the
+> undersigned contributor ("the Contributor").
+>
+> **1. ASSIGNMENT.** The Contributor hereby irrevocably assigns and transfers to
+> the Company all worldwide rights, titles and interests, including all
+> copyrights, neighbouring rights, database rights, design rights, trademarks,
+> trade secrets and all other intellectual-property rights, in any code, schema,
+> design, interface, illustration, copy, documentation or other material created
+> by the Contributor for EduRelay, whether before or after the date of this
+> Agreement and whether or not completed.
+>
+> **2. WAIVER.** To the extent permitted by law, the Contributor waives all moral
+> rights in the assigned material and agrees not to reproduce, reuse, license or
+> claim authorship over any of it, including in a portfolio, without the
+> Company's prior written consent.
+>
+> **3. CONSIDERATION.** The Contributor acknowledges receiving good and valuable
+> consideration, receipt of which is acknowledged.
+>
+> **4. CONFIDENTIALITY.** The Contributor will not disclose any non-public
+> information about the Company, its users, its code or its plans, during or
+> after the engagement.
+>
+> **5. WARRANTIES.** The Contributor warrants that the material is original, does
+> not infringe any third party's rights, and was not generated by copying code
+> from a source whose licence forbids it.
+>
+> **6. GOVERNING LAW.** Tunisian law. Courts of Tunis have exclusive
+> jurisdiction.
+>
+> Signed at: ____________________  Date: ____ / ____ / ________
+>
+> Contributor name: ______________________________
+>
+> Contributor ID / passport: ______________________
+>
+> Signature: ____________________________________
+>
+> For EduRelay: _________________________________
+>
+> Title: ________________________________________
+>
+> Signature: ____________________________________
+
+Keep the signed original outside the repository, in the company's legal folder,
+and log its existence in `docs/ownership.md` (date, name, scope — never the ID
+number or a scan).
+
+## 6. Reporting a problem
+
+Security: see [SECURITY.md](./SECURITY.md).
+Anything else: hello@edurelay.tn.
